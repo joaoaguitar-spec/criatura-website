@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criatura — Bando Musical · Portugal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; padding: 0; font: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg-void:     #120F0D;
+      --bg-deep:     #1A1713;
+      --bg-earth:    #2C2820;
+      --bg-surface:  #231F1A;
+      --parchment:   #D8D0BE;
+      --muted:       #5A4E3E;
+      --faint:       #3A3028;
+      --ghost:       #251E18;
+      --amber:       #C07840;
+      --violet:      #8888A0;
+      --rust:        #884420;
+      --blue:        #445088;
+      --font-serif:  'EB Garamond', Georgia, serif;
+      --font-sans:   'Inter', system-ui, sans-serif;
+    }
+
+    /* ─── BASE ───────────────────────────────────────────────── */
+    html {
+      font-size: 20px;
+    }
+    body {
+      font-family: var(--font-serif);
+      background: var(--bg-void);
+      color: var(--parchment);
+      font-size: 22px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── PAGE REVEAL ────────────────────────────────────────── */
+    @keyframes dawn {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .site {
+      animation: dawn 2.4s ease-in both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .site { animation: none; }
+    }
+
+    /* ─── UTILITIES ──────────────────────────────────────────── */
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .wrap--narrow {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    .label {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 2.5rem;
+    }
+    .rule {
+      border: none;
+      border-top: 1px solid var(--bg-earth);
+      margin: 0;
+    }
+
+    /* ─── NAVIGATION ─────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--bg-earth);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav__logo {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-variant: small-caps;
+      letter-spacing: 0.4em;
+      color: var(--parchment);
+    }
+    .nav__links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav__links a {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--faint);
+      transition: color 0.3s;
+    }
+    .nav__links a:hover { color: var(--amber); }
+
+    .nav__menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav__menu-btn span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--faint);
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      background: var(--bg-earth);
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2.5rem 5rem;
+      border-bottom: 3px solid var(--bg-surface);
+    }
+    .hero__origin {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      margin-bottom: 2rem;
+    }
+    .hero__name {
+      font-family: var(--font-serif);
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 400;
+      font-variant: small-caps;
+      letter-spacing: 0.3em;
+      color: var(--parchment);
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+    .hero__rule {
+      width: 30px;
+      height: 1px;
+      background: var(--amber);
+      margin: 0 auto 2rem;
+    }
+    .hero__quote {
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--faint);
+      max-width: 420px;
+      line-height: 1.9;
+      margin-bottom: 3rem;
+    }
+    .hero__ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.8rem 2.25rem;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.75; }
+    .btn--solid {
+      background: var(--amber);
+      color: var(--bg-void);
+    }
+    .btn--outline {
+      border: 1px solid var(--faint);
+      color: var(--faint);
+    }
+    .btn--outline:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      opacity: 1;
+    }
+
+    /* ─── SECTIONS ───────────────────────────────────────────── */
+    .section {
+      padding: 5.5rem 0;
+    }
+    .section--alt { background: var(--bg-surface); }
+    .section--deep { background: var(--bg-earth); }
+    .section--void { background: var(--bg-deep); }
+
+    /* ─── DISCOGRAFIA ────────────────────────────────────────── */
+    .albums {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .album__cover {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 1.1rem;
+    }
+    .album__cover svg {
+      width: 72%;
+      height: 72%;
+    }
+    .album__title {
+      font-size: 1.3rem;
+      color: var(--parchment);
+      margin-bottom: 0.25rem;
+    }
+    .album__meta {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--ghost);
+      letter-spacing: 0.12em;
+      line-height: 1.8;
+      margin-bottom: 0.6rem;
+    }
+    .album__link {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--violet);
+      border-bottom: 1px solid var(--violet);
+      padding-bottom: 1px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .album__link:hover { color: var(--parchment); border-color: var(--parchment); }
+
+    /* Pedra-Pão toggle */
+    .pedra-btn {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      border-bottom: 1px solid var(--amber);
+      padding-bottom: 1px;
+      margin-top: 0.4rem;
+      transition: opacity 0.2s;
+    }
+    .pedra-btn:hover { opacity: 0.7; }
+
+    .pedra-panel {
+      display: none;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--bg-earth);
+      grid-column: 1 / -1;
+    }
+    .pedra-panel.is-open { display: block; }
+    .pedra-inner {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .pedra-cover {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .pedra-cover svg { width: 68%; height: 68%; }
+    .pedra-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 0.75rem;
+    }
+    .pedra-lyric {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--faint);
+      border-left: 2px solid var(--rust);
+      padding-left: 0.85rem;
+      margin-top: 1rem;
+      line-height: 1.75;
+    }
+
+    .arc-note {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--ghost);
+      text-align: center;
+      margin-top: 2.5rem;
+      line-height: 1.8;
+    }
+
+    /* ─── BANDO ──────────────────────────────────────────────── */
+    .bando-intro {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.95;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+    .bando-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 2.5rem;
+    }
+    .bando-member {
+      font-size: 1rem;
+      color: var(--faint);
+      line-height: 1.9;
+    }
+    .bando-instrument {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--ghost);
+      display: block;
+      letter-spacing: 0.05em;
+    }
+
+    .collab-label {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      margin: 2.5rem 0 1rem;
+    }
+    .collab-text {
+      font-size: 0.95rem;
+      color: var(--ghost);
+      line-height: 1.85;
+    }
+    .collab-text em { color: var(--faint); font-style: normal; }
+
+    /* ─── AGENDA ─────────────────────────────────────────────── */
+    .show-list {
+      border-top: 1px solid var(--bg-earth);
+    }
+    .show {
+      display: grid;
+      grid-template-columns: 110px 1fr auto;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--bg-earth);
+      gap: 1rem;
+    }
+    .show__date {
+      font-size: 0.95rem;
+      color: var(--faint);
+      font-style: italic;
+    }
+    .show__venue {
+      font-size: 0.95rem;
+      color: var(--parchment);
+    }
+    .show__city {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--ghost);
+      letter-spacing: 0.08em;
+    }
+    .show__cta {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--violet);
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .show__cta:hover { color: var(--parchment); }
+    .show__cta--last { color: var(--amber); }
+    .show__cta--last:hover { color: var(--parchment); }
+
+    .agenda-note {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--ghost);
+      margin-top: 1.5rem;
+    }
+
+    /* ─── ARQUIVO ────────────────────────────────────────────── */
+    .press-list {
+      border-top: 1px solid var(--bg-surface);
+    }
+    .press-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--bg-surface);
+    }
+    .press-item__src {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      margin-bottom: 0.3rem;
+    }
+    .press-item__title {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.55;
+      transition: color 0.2s;
+    }
+    .press-item__title:hover { color: var(--parchment); }
+
+    /* ─── CONTACTO ───────────────────────────────────────────── */
+    .contact-heading {
+      font-size: 2.25rem;
+      font-weight: 400;
+      color: var(--parchment);
+      margin-bottom: 0.4rem;
+    }
+    .contact-sub {
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--faint);
+      margin-bottom: 2.5rem;
+    }
+    .contact-block { margin-bottom: 1.75rem; }
+    .contact-key {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      margin-bottom: 0.35rem;
+    }
+    .contact-val {
+      font-size: 1.05rem;
+      color: var(--violet);
+      display: block;
+      transition: color 0.2s;
+    }
+    .contact-val:hover { color: var(--parchment); }
+    .socials {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .socials a {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      transition: color 0.2s;
+    }
+    .socials a:hover { color: var(--amber); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .footer {
+      background: var(--bg-void);
+      border-top: 1px solid var(--bg-deep);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__copy {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      color: var(--ghost);
+    }
+    .footer__tag {
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ghost);
+    }
+
+    /* ─── MOBILE ─────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .nav__links { display: none; }
+      .nav__links.is-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-deep);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--bg-earth);
+        gap: 1.25rem;
+        z-index: 99;
+      }
+      .nav { position: relative; }
+      .nav__menu-btn { display: flex; }
+
+      .hero__name { font-size: clamp(2.8rem, 14vw, 5rem); }
+      .albums { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pedra-inner { grid-template-columns: 1fr; }
+      .bando-grid { grid-template-columns: 1fr; }
+      .show { grid-template-columns: 90px 1fr; }
+      .show__cta { display: none; }
+      .wrap, .wrap--narrow { padding: 0 1.25rem; }
+      .nav { padding: 1.1rem 1.25rem; }
+      .footer { padding: 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+  </style>
+</head>
+<body>
+<div class="site">
+
+  <!-- ── NAVIGATION ──────────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Navegação principal">
+    <a href="#" class="nav__logo" aria-label="Criatura — início">Criatura</a>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#discografia">Discografia</a></li>
+      <li><a href="#bando">Bando</a></li>
+      <li><a href="#agenda">Agenda</a></li>
+      <li><a href="#arquivo">Arquivo</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="nav__menu-btn" id="menu-btn" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────────────────────── -->
+  <section class="hero" aria-label="Introdução">
+    <p class="hero__origin">Portugal · Folk · Desde 2013</p>
+    <h1 class="hero__name">Criatura</h1>
+    <div class="hero__rule" aria-hidden="true"></div>
+    <p class="hero__quote">
+      «A origem da Criação é, por definição, sem testemunhas.<br>
+      A única realidade perceptível é o fruto da criação, a Criatura.»
+    </p>
+    <div class="hero__ctas">
+      <a href="#discografia" class="btn btn--solid">Ouvir agora</a>
+      <a href="#agenda" class="btn btn--outline">Espetáculos</a>
+    </div>
+  </section>
+
+  <!-- ── DISCOGRAFIA ─────────────────────────────────────────── -->
+  <section class="section section--alt" id="discografia" aria-label="Discografia">
+    <div class="wrap">
+      <span class="label">Discografia</span>
+      <div class="albums">
+
+        <!-- Aurora -->
+        <article aria-label="Álbum Aurora, 2016">
+          <div class="album__cover" style="background: #E8E5DC;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Celestial navigation dial -->
+              <circle cx="100" cy="100" r="88" fill="none" stroke="#2A2E2C" stroke-width="0.5"/>
+              <!-- Cardinal ticks -->
+              <line x1="100" y1="7"   x2="100" y2="23"  stroke="#2A2E2C" stroke-width="0.9"/>
+              <line x1="100" y1="177" x2="100" y2="193" stroke="#2A2E2C" stroke-width="0.9"/>
+              <line x1="7"   y1="100" x2="23"  y2="100" stroke="#2A2E2C" stroke-width="0.9"/>
+              <line x1="177" y1="100" x2="193" y2="100" stroke="#2A2E2C" stroke-width="0.9"/>
+              <!-- Intermediate ticks -->
+              <line x1="143" y1="21"  x2="136" y2="33"  stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="179" y1="57"  x2="167" y2="64"  stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="179" y1="143" x2="167" y2="136" stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="143" y1="179" x2="136" y2="167" stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="57"  y1="179" x2="64"  y2="167" stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="21"  y1="143" x2="33"  y2="136" stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="21"  y1="57"  x2="33"  y2="64"  stroke="#2A2E2C" stroke-width="0.4"/>
+              <line x1="57"  y1="21"  x2="64"  y2="33"  stroke="#2A2E2C" stroke-width="0.4"/>
+              <!-- Quadrant dashed lines -->
+              <line x1="100" y1="12" x2="100" y2="188" stroke="#2A2E2C" stroke-width="0.2" stroke-dasharray="1.5,9"/>
+              <line x1="12"  y1="100" x2="188" y2="100" stroke="#2A2E2C" stroke-width="0.2" stroke-dasharray="1.5,9"/>
+              <!-- Inner dashed ring -->
+              <circle cx="100" cy="100" r="54" fill="none" stroke="#2A2E2C" stroke-width="0.2" stroke-dasharray="2,7"/>
+              <!-- Centre crosshair -->
+              <circle cx="100" cy="100" r="7"  fill="none" stroke="#2A2E2C" stroke-width="0.5"/>
+              <line x1="93" y1="100" x2="107" y2="100" stroke="#2A2E2C" stroke-width="0.5"/>
+              <line x1="100" y1="93" x2="100" y2="107" stroke="#2A2E2C" stroke-width="0.5"/>
+              <!-- Roman numerals -->
+              <text x="93"  y="33"  font-size="7" fill="#5A6058" font-family="serif">XII</text>
+              <text x="174" y="104" font-size="7" fill="#5A6058" font-family="serif">III</text>
+              <text x="91"  y="175" font-size="7" fill="#5A6058" font-family="serif">VI</text>
+              <text x="10"  y="104" font-size="7" fill="#5A6058" font-family="serif">IX</text>
+              <!-- Decorative arc fragments suggesting quadrant photos -->
+              <path d="M 46 54 Q 100 30 154 54" fill="none" stroke="#8A9E9A" stroke-width="0.3" opacity="0.5"/>
+              <path d="M 154 146 Q 100 170 46 146" fill="none" stroke="#8A9E9A" stroke-width="0.3" opacity="0.5"/>
+            </svg>
+          </div>
+          <h2 class="album__title">Aurora</h2>
+          <p class="album__meta">
+            2016 · Tradisom Produções Culturais<br>
+            Mix &amp; master: Tó Pinheiro da Silva<br>
+            Artwork: Duck.Production
+          </p>
+          <a href="https://criaturapt.bandcamp.com/album/aurora" class="album__link" target="_blank" rel="noopener">
+            Ouvir no Bandcamp →
+          </a>
+        </article>
+
+        <!-- Bem Bonda -->
+        <article aria-label="Álbum Bem Bonda, 2021">
+          <div class="album__cover" style="background: #D8D4CE;">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <clipPath id="stone-clip">
+                  <polygon points="78,38 116,31 143,54 153,88 149,127 123,153 88,159 60,141 44,112 50,77"/>
+                </clipPath>
+              </defs>
+              <!-- Mineral strata — exact colours from the Mina de São Domingos stone -->
+              <rect x="40" y="28"  width="130" height="23" fill="#8888A0" clip-path="url(#stone-clip)"/>
+              <rect x="40" y="51"  width="130" height="28" fill="#C07840" clip-path="url(#stone-clip)"/>
+              <rect x="40" y="79"  width="130" height="26" fill="#445088" clip-path="url(#stone-clip)"/>
+              <rect x="40" y="105" width="130" height="24" fill="#884420" clip-path="url(#stone-clip)"/>
+              <rect x="40" y="129" width="130" height="34" fill="#ADAAA2" clip-path="url(#stone-clip)"/>
+              <!-- Stone outline -->
+              <polygon points="78,38 116,31 143,54 153,88 149,127 123,153 88,159 60,141 44,112 50,77"
+                       fill="none" stroke="#9A9690" stroke-width="0.7"/>
+            </svg>
+          </div>
+          <h2 class="album__title">Bem Bonda</h2>
+          <p class="album__meta">
+            2021 · Omnichord Records<br>
+            Mix &amp; master: António Pinheiro da Silva<br>
+            Artwork: Catherina Cardoso &amp; João Catarino
+          </p>
+          <a href="https://criaturapt.bandcamp.com/album/bem-bonda" class="album__link" target="_blank" rel="noopener">
+            Ouvir no Bandcamp →
+          </a>
+          <button class="pedra-btn" id="pedra-btn" aria-expanded="false" aria-controls="pedra-panel">
+            A Pedra-Pão →
+          </button>
+        </article>
+
+        <!-- Pedra-Pão panel — spans full width -->
+        <div class="pedra-panel" id="pedra-panel" role="region" aria-label="A história da Pedra-Pão">
+          <span class="label" style="margin-bottom: 1.25rem;">A Pedra-Pão</span>
+          <div class="pedra-inner">
+            <div class="pedra-cover" style="background: #F0EAD8;">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <clipPath id="bread-clip">
+                    <polygon points="75,42 118,35 146,57 156,90 151,129 124,156 87,162 59,143 43,115 49,80"/>
+                  </clipPath>
+                </defs>
+                <!-- Bread strata — pigments: batata-doce, beterraba, açafrão -->
+                <rect x="38" y="32"  width="132" height="24" fill="#7A4A82" clip-path="url(#bread-clip)"/>
+                <rect x="38" y="56"  width="132" height="28" fill="#C86820" clip-path="url(#bread-clip)"/>
+                <rect x="38" y="84"  width="132" height="26" fill="#C89818" clip-path="url(#bread-clip)"/>
+                <rect x="38" y="110" width="132" height="24" fill="#882840" clip-path="url(#bread-clip)"/>
+                <rect x="38" y="134" width="132" height="32" fill="#C8A060" clip-path="url(#bread-clip)"/>
+                <!-- Bread outline -->
+                <polygon points="75,42 118,35 146,57 156,90 151,129 124,156 87,162 59,143 43,115 49,80"
+                         fill="none" stroke="#9A7840" stroke-width="0.8"/>
+              </svg>
+            </div>
+            <div>
+              <p class="pedra-text">
+                A pedra da capa foi recolhida na Mina de São Domingos, no Alentejo,
+                após um concerto em Serpa. O artista Diogo Vaz Cavaleiro transformou-a
+                num pão na Padaria Natural Peter Pão, no Fundão.
+              </p>
+              <p class="pedra-text">
+                Pigmentos naturais — batata-doce roxa, beterraba e açafrão da índia —
+                recriam as camadas coloridas da pedra original. Enviado aos membros do
+                Bando como objecto de arte, com um código para ouvir o disco.
+              </p>
+              <p class="pedra-lyric">
+                «Bem Bonda o pão que está caro,<br>
+                quanto mais a fome.»
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="arc-note">
+        De céu a terra —<br>de Aurora ao chão do Bem Bonda.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── O BANDO ─────────────────────────────────────────────── -->
+  <section class="section section--deep" id="bando" aria-label="O Bando">
+    <div class="wrap--narrow">
+      <span class="label">O Bando</span>
+      <p class="bando-intro">
+        Não somos uma banda. Somos um bando. Nascemos de uma residência
+        artística em Serpa, no Alentejo, em 2013–14 — forjados na escuta
+        profunda das raízes musicais de Portugal e do que a terra tem para dizer.
+      </p>
+      <div class="bando-grid">
+        <div class="bando-member">Acácio Barbosa<span class="bando-instrument">guitarra portuguesa</span></div>
+        <div class="bando-member">João Aguiar<span class="bando-instrument">guitarra eléctrica</span></div>
+        <div class="bando-member">Alexandre Bernardo<span class="bando-instrument">bandolim, cavaquinho</span></div>
+        <div class="bando-member">Paulo Lourenço<span class="bando-instrument">baixo eléctrico</span></div>
+        <div class="bando-member">Cláudio Gomes<span class="bando-instrument">trompete</span></div>
+        <div class="bando-member">Ricardo Coelho<span class="bando-instrument">gaita de foles, flauta, ocarina</span></div>
+        <div class="bando-member">Edgar Valente<span class="bando-instrument">voz, piano, teclados, adufe</span></div>
+        <div class="bando-member">Iúri Oliveira<span class="bando-instrument">percussões</span></div>
+        <div class="bando-member">Fábio Cantinho<span class="bando-instrument">bateria</span></div>
+        <div class="bando-member">Gil Dionísio<span class="bando-instrument">voz, violino</span></div>
+      </div>
+      <p class="collab-label">Participações especiais — Bem Bonda</p>
+      <p class="collab-text">
+        <em>Yaw Tembe</em> (trompete) ·
+        <em>Coro dos Anjos</em> (23 vozes) ·
+        Produção: <em>Paulo Lourenço, Edgar Valente, Gil Dionísio</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── AGENDA ──────────────────────────────────────────────── -->
+  <section class="section section--alt" id="agenda" aria-label="Agenda de espetáculos">
+    <div class="wrap--narrow">
+      <span class="label">Agenda</span>
+      <div class="show-list" role="list">
+
+        <div class="show" role="listitem">
+          <span class="show__date">Set 2025</span>
+          <div>
+            <p class="show__venue">Teatro Rivoli</p>
+            <p class="show__city">Porto</p>
+          </div>
+          <a href="#" class="show__cta">Bilhetes</a>
+        </div>
+
+        <div class="show" role="listitem">
+          <span class="show__date">Out 2025</span>
+          <div>
+            <p class="show__venue">Culturgest</p>
+            <p class="show__city">Lisboa</p>
+          </div>
+          <a href="#" class="show__cta">Bilhetes</a>
+        </div>
+
+        <div class="show" role="listitem">
+          <span class="show__date">Out 2025</span>
+          <div>
+            <p class="show__venue">Teatro Tivoli BBVA</p>
+            <p class="show__city">Lisboa</p>
+          </div>
+          <a href="https://artesonora.pt/criatura-anuncia-ultimo-concerto-da-tour-bem-bonda-no-teatro-tivoli-bbva-bilhetes/"
+             class="show__cta show__cta--last" target="_blank" rel="noopener">
+            Último concerto Bem Bonda →
+          </a>
+        </div>
+
+      </div>
+      <p class="agenda-note">
+        O bando retira-se agora para trabalhar no próximo capítulo.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── ARQUIVO ─────────────────────────────────────────────── -->
+  <section class="section section--deep" id="arquivo" aria-label="Arquivo de imprensa">
+    <div class="wrap--narrow">
+      <span class="label">Arquivo</span>
+      <div class="press-list">
+
+        <div class="press-item">
+          <p class="press-item__src">Rimas e Batidas · 2021</p>
+          <a href="https://www.rimasebatidas.pt/criatura-ha-uma-intencao-profunda-de-trabalhar-a-raiz-popular-a-partir-de-uma-matriz-universal/"
+             class="press-item__title" target="_blank" rel="noopener">
+            «Há uma intenção profunda de trabalhar a raiz popular a partir de uma matriz universal»
+          </a>
+        </div>
+
+        <div class="press-item">
+          <p class="press-item__src">Observador · 2021</p>
+          <a href="https://observador.pt/2021/03/24/a-tradicao-desta-criatura-e-cantar-o-que-a-terra-lhe-da/"
+             class="press-item__title" target="_blank" rel="noopener">
+            «A tradição desta Criatura é cantar o que a terra lhe dá»
+          </a>
+        </div>
+
+        <div class="press-item">
+          <p class="press-item__src">Público · 2020</p>
+          <a href="https://www.publico.pt/2020/12/22/culturaipsilon/noticia/criatura-transformou-pedras-paes-fez-disco-2021-1943961"
+             class="press-item__title" target="_blank" rel="noopener">
+            «Criatura transformou pedras em pães e fez um disco para 2021»
+          </a>
+        </div>
+
+        <div class="press-item">
+          <p class="press-item__src">Visão · Jornal de Letras · 2023</p>
+          <a href="https://visao.pt/jornaldeletras/cronicas-jl/2023-09-25-criatura-2/"
+             class="press-item__title" target="_blank" rel="noopener">
+            Valter Hugo Mãe sobre a Criatura — «bandeiras e família, uma aldeia vibrante a pulsar»
+          </a>
+        </div>
+
+        <div class="press-item">
+          <p class="press-item__src">INTRO · 2021</p>
+          <a href="https://www.intro.pt/bem-bonda-criatura-ed-autor-2021/"
+             class="press-item__title" target="_blank" rel="noopener">
+            Bem Bonda — crítica
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACTO ────────────────────────────────────────────── -->
+  <section class="section section--void" id="contacto" aria-label="Contacto">
+    <div class="wrap--narrow">
+      <span class="label">Contacto</span>
+      <h2 class="contact-heading">Falar connosco</h2>
+      <p class="contact-sub">Para concertos, imprensa e colaborações.</p>
+
+      <div class="contact-block">
+        <p class="contact-key">Booking</p>
+        <a href="mailto:ricardo.dias@haushaus.pt" class="contact-val">
+          ricardo.dias@haushaus.pt
+        </a>
+      </div>
+
+      <div class="contact-block">
+        <p class="contact-key">Redes</p>
+        <div class="socials">
+          <a href="https://instagram.com/criatura.pt" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://criaturapt.bandcamp.com" target="_blank" rel="noopener">Bandcamp</a>
+          <a href="https://facebook.com/Criatura.pt" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://bembonda.pt" target="_blank" rel="noopener">Bembonda.pt</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <span class="footer__copy">© 2025 Criatura · Todos os direitos reservados</span>
+    <span class="footer__tag">Portugal · Folk</span>
+  </footer>
+
+</div><!-- /.site -->
+
+<script>
+  // Mobile nav toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.getElementById('nav-links');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  // Close mobile nav on link click
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Pedra-Pão toggle
+  const pedraBtn = document.getElementById('pedra-btn');
+  const pedraPanel = document.getElementById('pedra-panel');
+  pedraBtn.addEventListener('click', () => {
+    const isOpen = pedraPanel.classList.toggle('is-open');
+    pedraBtn.setAttribute('aria-expanded', isOpen);
+    pedraBtn.textContent = isOpen ? '← Fechar a Pedra-Pão' : 'A Pedra-Pão →';
+    if (isOpen) {
+      pedraPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav__links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + entry.target.id
+            ? 'var(--amber)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
