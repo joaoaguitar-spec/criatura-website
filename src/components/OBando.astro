@@ -1,0 +1,90 @@
+<section class="section section--void" id="o-bando" aria-label="O Bando — lista de contactos">
+  <div class="wrap--narrow">
+    <span class="label">O Bando</span>
+    <h2 class="obando-heading">Faz parte do bando.</h2>
+    <p class="obando-sub">Sê o primeiro a saber.</p>
+
+    <ul class="obando-perks">
+      <li>Primeiros a saber dos concertos</li>
+      <li>Acesso antecipado a novos trabalhos</li>
+      <li>A história por detrás da música</li>
+    </ul>
+
+    <form class="obando-form" action="#" method="post" aria-label="Subscrever newsletter">
+      <input
+        class="obando-input"
+        type="email"
+        name="email"
+        placeholder="o teu email"
+        required
+        aria-label="O teu endereço de email"
+      />
+      <button class="obando-submit btn btn--solid" type="submit">Entrar</button>
+    </form>
+
+    <p class="obando-note">Sem spam. Só o essencial.</p>
+  </div>
+</section>
+
+<style is:global>
+  .obando-heading {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: var(--parchment);
+    margin-bottom: 0.3rem;
+  }
+  .obando-sub {
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .obando-perks {
+    list-style: none;
+    border-left: 2px solid var(--amber);
+    padding-left: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .obando-perks li {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .obando-form {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1rem;
+  }
+  .obando-input {
+    flex: 1;
+    background: var(--bg-earth);
+    border: 1px solid var(--faint);
+    border-right: none;
+    color: var(--parchment);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    padding: 0.8rem 1.25rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .obando-input::placeholder {
+    color: var(--ghost);
+    letter-spacing: 0.12em;
+  }
+  .obando-input:focus {
+    border-color: var(--amber);
+  }
+  .obando-submit {
+    border: 1px solid var(--amber);
+    white-space: nowrap;
+  }
+  .obando-note {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--ghost);
+    letter-spacing: 0.1em;
+  }
+</style>
