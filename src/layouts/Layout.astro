@@ -162,7 +162,6 @@ body {
 
 /* ─── HERO ───────────────────────────────────────────────── */
 .hero {
-  background: var(--bg-earth);
   min-height: 92vh;
   display: flex;
   flex-direction: column;
@@ -226,8 +225,8 @@ body {
   color: var(--bg-void);
 }
 .btn--outline {
-  border: 1px solid var(--faint);
-  color: var(--faint);
+  border: 1px solid rgba(216,208,190,0.45);
+  color: var(--parchment);
 }
 .btn--outline:hover {
   border-color: var(--amber);
@@ -365,13 +364,13 @@ body {
 }
 .bando-member {
   font-size: 1rem;
-  color: var(--faint);
+  color: var(--parchment);
   line-height: 1.9;
 }
 .bando-instrument {
   font-family: var(--font-sans);
   font-size: 15px;
-  color: var(--ghost);
+  color: var(--faint);
   display: block;
   letter-spacing: 0.05em;
 }
@@ -387,21 +386,21 @@ body {
 }
 .collab-text {
   font-size: 0.95rem;
-  color: var(--ghost);
+  color: var(--faint);
   line-height: 1.85;
 }
 .collab-text em { color: var(--faint); font-style: normal; }
 
 /* ─── AGENDA ─────────────────────────────────────────────── */
 .show-list {
-  border-top: 1px solid var(--bg-earth);
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 .show {
   display: grid;
   grid-template-columns: 110px 1fr auto;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--bg-earth);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   gap: 1rem;
 }
 .show__date {
@@ -416,7 +415,7 @@ body {
 .show__city {
   font-family: var(--font-sans);
   font-size: 15px;
-  color: var(--ghost);
+  color: var(--muted);
   letter-spacing: 0.08em;
 }
 .show__cta {
@@ -435,7 +434,7 @@ body {
 .agenda-note {
   font-style: italic;
   font-size: 0.9rem;
-  color: var(--ghost);
+  color: var(--muted);
   margin-top: 1.5rem;
 }
 
@@ -473,7 +472,7 @@ body {
 .contact-sub {
   font-style: italic;
   font-size: 1rem;
-  color: var(--faint);
+  color: var(--muted);
   margin-bottom: 2.5rem;
 }
 .contact-block { margin-bottom: 1.75rem; }
