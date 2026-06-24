@@ -200,7 +200,7 @@ body {
 .hero__quote {
   font-style: italic;
   font-size: 1.05rem;
-  color: var(--faint);
+  color: var(--muted);
   max-width: 640px;
   line-height: 1.9;
   margin-bottom: 3rem;
@@ -344,7 +344,7 @@ body {
 .arc-note {
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--ghost);
+  color: var(--faint);
   text-align: center;
   margin-top: 2.5rem;
   line-height: 1.8;
@@ -527,6 +527,15 @@ body {
   font-size: 17px;
   color: var(--ghost);
 }
+.footer__link {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ghost);
+  transition: color 0.2s;
+}
+.footer__link:hover { color: var(--amber); }
 
 /* ─── MOBILE ─────────────────────────────────────────────── */
 @media (max-width: 640px) {
@@ -556,6 +565,8 @@ body {
   .wrap, .wrap--narrow { padding: 0 1.25rem; }
   .nav { padding: 1.1rem 1.25rem; }
   .footer { padding: 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  #videos .wrap > div { grid-template-columns: 1fr !important; }
+  #a-banda [style*="repeat(5"] { grid-template-columns: repeat(2, 1fr) !important; }
 }
     </style>
     <!-- Google Analytics -->
