@@ -33,9 +33,11 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
       font-size: 48px;
       font-weight: 400;
       letter-spacing: 0.35em;
+      text-indent: 0.35em;
       text-transform: uppercase;
       color: #D8D0BE;
       margin-bottom: 2.5rem;
+      text-align: center;
     }
     form {
       display: flex;
@@ -71,6 +73,7 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
       font-family: 'EB Garamond', Georgia, serif;
       font-size: 15px;
       letter-spacing: 0.4em;
+      text-indent: 0.4em;
       text-transform: uppercase;
       cursor: pointer;
       padding: 0.5rem 1rem;
@@ -88,8 +91,10 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
       font-style: italic;
       font-size: 13px;
       letter-spacing: 0.2em;
+      text-indent: 0.2em;
       color: #445088;
       margin-top: 0.5rem;
+      text-align: center;
     }
   </style>
 </head>
