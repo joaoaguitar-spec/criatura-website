@@ -7,4 +7,4 @@
 
 [[edge_functions]]
   path = "/*"
-  function = "auth"
+  function = "login"
