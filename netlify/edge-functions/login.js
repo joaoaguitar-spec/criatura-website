@@ -12,7 +12,7 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      height: 100%;
+      min-height: 100vh;
       background: #2C2820;
       color: #D8D0BE;
       font-family: 'EB Garamond', Georgia, serif;
@@ -25,6 +25,9 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
       padding: 2rem;
       width: 100%;
       max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .title {
       font-size: 48px;
@@ -32,20 +35,14 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: #D8D0BE;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle {
-      font-style: italic;
-      font-size: 15px;
-      letter-spacing: 0.25em;
-      color: #8888A0;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      width: 100%;
     }
     input[type="password"] {
       width: 100%;
@@ -88,29 +85,24 @@ const LOGIN_HTML = (error = false) => `<!DOCTYPE html>
       min-height: 1.5rem;
     }
     .footer {
-      position: fixed;
-      bottom: 2rem;
-      left: 0;
-      right: 0;
-      text-align: center;
       font-style: italic;
       font-size: 13px;
       letter-spacing: 0.2em;
       color: #445088;
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <p class="title">Criatura</p>
-    <p class="subtitle">Serpa · Alentejo · Portugal</p>
     <form method="POST" action="/login">
       <input type="password" name="password" placeholder="palavra-passe" autofocus autocomplete="current-password">
       <p class="error">${error ? "palavra-passe incorrecta" : ""}</p>
       <button type="submit">Entrar</button>
     </form>
+    <p class="footer">site em construção</p>
   </div>
-  <p class="footer">site em construção</p>
 </body>
 </html>`;
 
