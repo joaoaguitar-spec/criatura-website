@@ -12,41 +12,27 @@
       <li>A história por detrás da música</li>
     </ul>
 
-    <form id="bando-form" style="margin-bottom:0;">
+    <form
+      action="https://assets.mailerlite.com/jsonp/2466852/forms/J712eN/subscribe"
+      method="post"
+      target="_blank"
+    >
       <div style="display:flex; gap:0; margin-bottom:0.75rem;">
-        <input type="email" id="bando-email" name="fields[email]" placeholder="o teu email" required style="flex:1; background:#1A1713; border:1px solid #3A3028; border-right:none; color:#D8D0BE; padding:0.8rem 1.25rem; font-family:var(--font-serif); font-size:1rem; outline:none;">
-        <button type="submit" id="bando-submit" style="background:#C07840; color:#120F0D; border:none; padding:0.8rem 1.75rem; font-family:var(--font-sans); font-size:15px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; cursor:pointer;">Entrar</button>
+        <input
+          type="email"
+          name="fields[email]"
+          placeholder="o teu email"
+          required
+          style="flex:1; background:#1A1713; border:1px solid #3A3028; border-right:none; color:#D8D0BE; padding:0.8rem 1.25rem; font-family:var(--font-serif); font-size:1rem; outline:none;"
+        />
+        <button
+          type="submit"
+          style="background:#C07840; color:#120F0D; border:none; padding:0.8rem 1.75rem; font-family:var(--font-sans); font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; cursor:pointer;"
+        >
+          Entrar
+        </button>
       </div>
     </form>
-
-    <div id="bando-success" style="display:none; padding:1.5rem 0;">
-      <p style="font-family:'EB Garamond', serif; font-size:1.5rem; color:#D8D0BE; margin-bottom:0.4rem;">Obrigado.</p>
-      <p style="font-family:'EB Garamond', serif; font-style:italic; font-size:1rem; color:#5A4E3E;">Vemo-nos em breve.</p>
-    </div>
-
-    <script>
-    document.getElementById('bando-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const email = document.getElementById('bando-email').value;
-      const btn = document.getElementById('bando-submit');
-      btn.textContent = '...';
-      btn.disabled = true;
-      try {
-        const formData = new FormData();
-        formData.append('fields[email]', email);
-        await fetch('https://assets.mailerlite.com/jsonp/2466852/forms/J712eN/subscribe', {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors'
-        });
-        document.getElementById('bando-form').style.display = 'none';
-        document.getElementById('bando-success').style.display = 'block';
-      } catch(err) {
-        btn.textContent = 'Entrar';
-        btn.disabled = false;
-      }
-    });
-    </script>
 
     <p class="obando-note">Sem spam. Só o essencial.</p>
   </div>
