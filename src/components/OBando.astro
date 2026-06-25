@@ -12,27 +12,28 @@
       <li>A história por detrás da música</li>
     </ul>
 
-    <form
-      action="https://assets.mailerlite.com/jsonp/2466852/forms/191114709786691571/subscribe"
-      method="post"
-      target="_blank"
-    >
-      <div style="display:flex; gap:0; margin-bottom:0.75rem;">
-        <input
-          type="email"
-          name="fields[email]"
-          placeholder="o teu email"
-          required
-          style="flex:1; background:#1A1713; border:1px solid #3A3028; border-right:none; color:#D8D0BE; padding:0.8rem 1.25rem; font-family:var(--font-serif); font-size:1rem; outline:none;"
-        />
-        <button
-          type="submit"
-          style="background:#C07840; color:#120F0D; border:none; padding:0.8rem 1.75rem; font-family:var(--font-sans); font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; cursor:pointer;"
-        >
-          Entrar
-        </button>
-      </div>
-    </form>
+    <div id="bando-form-wrap">
+      <form id="bando-form">
+        <div style="display:flex; gap:0; margin-bottom:0.75rem;">
+          <input type="email" id="bando-email" placeholder="o teu email" required style="flex:1; background:#1A1713; border:1px solid #3A3028; border-right:none; color:#D8D0BE; padding:0.8rem 1.25rem; font-family:var(--font-serif); font-size:1rem; outline:none;" />
+          <button type="submit" style="background:#C07840; color:#120F0D; border:none; padding:0.8rem 1.75rem; font-family:var(--font-sans); font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; cursor:pointer;">Entrar</button>
+        </div>
+      </form>
+      <p id="bando-success" style="display:none; font-family:var(--font-serif); font-size:1.5rem; color:#D8D0BE;">Obrigado. <em>Vemo-nos em breve.</em></p>
+    </div>
+    <script>
+      document.getElementById('bando-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('bando-email').value;
+        const url = 'https://assets.mailerlite.com/jsonp/2466852/forms/191114709786691571/subscribe';
+        const body = new URLSearchParams({ 'fields[email]': email });
+        try {
+          await fetch(url, { method: 'POST', body, mode: 'no-cors' });
+        } catch(err) {}
+        document.getElementById('bando-form').style.display = 'none';
+        document.getElementById('bando-success').style.display = 'block';
+      });
+    </script>
 
     <p class="obando-note">Sem spam. Só o essencial.</p>
   </div>
